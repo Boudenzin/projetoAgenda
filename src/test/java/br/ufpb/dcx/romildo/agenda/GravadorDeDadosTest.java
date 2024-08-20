@@ -12,13 +12,13 @@ public class GravadorDeDadosTest {
 
     @Test
     public void testaGravacao() throws IOException {
-        File arquivoContatos = new File(GravadorDeDados.ARQUIVOS_CONTATOS);
+        File arquivoContatos = new File(GravadorDeDados.ARQUIVO_CONTATOS);
         if (arquivoContatos.exists()) {
             arquivoContatos.delete();
         }
 
         GravadorDeDados gravadorDeDados = new GravadorDeDados();
-        File arquivo = new File(GravadorDeDados.ARQUIVOS_CONTATOS);
+        File arquivo = new File(GravadorDeDados.ARQUIVO_CONTATOS);
         assertFalse(arquivo.exists());
         HashMap<String, Contato> contatosMap = new HashMap<>();
         contatosMap.put("Ayla", new Contato("Ayla", 5, 10));
@@ -31,13 +31,13 @@ public class GravadorDeDadosTest {
 
     @Test
     public void testaRecuperacao() throws IOException {
-        File arquivoContatos = new File(GravadorDeDados.ARQUIVOS_CONTATOS);
+        File arquivoContatos = new File(GravadorDeDados.ARQUIVO_CONTATOS);
         if (arquivoContatos.exists()) {
             arquivoContatos.delete();
         }
 
         GravadorDeDados gravadorDeDados = new GravadorDeDados();
-        File arquivo = new File(GravadorDeDados.ARQUIVOS_CONTATOS);
+        File arquivo = new File(GravadorDeDados.ARQUIVO_CONTATOS);
         assertFalse(arquivo.exists());
         HashMap<String, Contato> contatosMap = new HashMap<>();
         contatosMap.put("Ayla", new Contato("Ayla", 5, 10));

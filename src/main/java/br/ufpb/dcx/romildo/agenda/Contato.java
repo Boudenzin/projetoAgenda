@@ -49,7 +49,10 @@ public class Contato implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(nome, diaAniversario, mesAniversario);
+        int result = Objects.hashCode(nome);
+        result = 31 * result + diaAniversario;
+        result = 31 * result + mesAniversario;
+        return result;
     }
 
     @Override
