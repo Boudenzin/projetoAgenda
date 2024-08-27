@@ -1,6 +1,9 @@
 package br.ufpb.dcx.romildo.agenda.gui;
 import javax.swing.JFrame;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
 public class AgendaGUI2 extends JFrame {
     public AgendaGUI2() {
@@ -19,6 +22,20 @@ public class AgendaGUI2 extends JFrame {
         setLocation(x, y);
         setResizable(false);
         getContentPane().setBackground(Color.lightGray);
+
+    }
+
+    public static void main(String[] args) {
+        JFrame janela2 = new AgendaGUI2();
+        janela2.setVisible(true);
+
+        WindowListener fechadorDeJanelaSecundaria = new WindowAdapter() {
+            @Override
+            public void windowOpened(WindowEvent e) {
+                super.windowOpened(e);
+            }
+        };
+        janela2.addWindowListener(fechadorDeJanelaSecundaria);
 
     }
 }
