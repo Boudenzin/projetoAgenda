@@ -46,31 +46,44 @@ public class AgendaGUI3_Menu extends JFrame {
         menuCadastrar.add(menuCadastrarAniversariante);
 
         JMenu menuPesquisar = new JMenu("Pesquisar");
-        JMenuItem menuPesquisarAniversariante = new JMenuItem();
+        JMenuItem menuPesquisarAniversariante = new JMenuItem("Pesquisar Aniversariante");
         menuPesquisar.add(menuPesquisarAniversariante);
 
         JMenu menuRemover = new JMenu("Remover");
         JMenuItem menuRemoverAniversariante = new JMenuItem("Remover Aniversariante");
         menuRemover.add(menuRemoverAniversariante);
 
-        menuPesquisarAniversariante.addActionListener(new AgendaSearchController(agenda, this));
+        menuRemover.add(menuRemoverAniversariante);
+        menuPesquisarAniversariante.addActionListener(new AgendaSearchController(agenda,this));
         menuRemoverAniversariante.addActionListener(new AgendaRemoveController(agenda, this));
-        menuCadastrarAniversariante.addActionListener(new AgendaAddController(agenda, this));
+        menuCadastrarAniversariante.addActionListener(
+                (ae) -> {
+                    String nome = JOptionPane.showInputDialog(this,
+                            "Qual o nome do aniversariante?");
+                    int dia = Integer.parseInt(JOptionPane.showInputDialog(this,
+                            "Qual o dia do mês em que nasceu? [1-31]"));
+                    int mes = Integer.parseInt(JOptionPane.showInputDialog(this,
+                            "Qual o mês em que nasceu?[1-12]"));
+                    boolean cadastrou = agenda.cadastraContato(nome, dia, mes);
+                    if (cadastrou) {
+                        JOptionPane.showMessageDialog(this,
+                                "Aniversariante cadastrado");
+                    } else {
+                        JOptionPane.showMessageDialog(this,
+                                "Aniversariante não foi cadastrado. " +
+                                        "Verifique se já não existia");
+                    }
+                });
+        barraDeMenu.add(menuCadastrar);
+        barraDeMenu.add(menuPesquisar);
+        barraDeMenu.add(menuRemover);
+        setJMenuBar(barraDeMenu);
 
-        /*(ae) -> {
-            String nome = JOptionPane.showInputDialog(this, "Qual o nome do sistema?", "Agenda de Amiversários", JOptionPane.INFORMATION_MESSAGE);
-            int dia = Integer.parseInt(JOptionPane.showInputDialog(this, "Qual o do dia em que nasceu? [1-31]", "Agenda de Aniversários", JOptionPane.INFORMATION_MESSAGE));
-            int mes = Integer.parseInt(JOptionPane.showInputDialog(this, "Qual o mês em que nasceu? [1-12]", "Agenda de Aniversários", JOptionPane.INFORMATION_MESSAGE));
-            boolean cadastrou = agenda.cadastraContato(nome, dia, mes);
-            if (cadastrou) {
-                JOptionPane.showMessageDialog(this,
-                        "Aniversariante cadastrado");
-            } else {
-                JOptionPane.showMessageDialog(this,
-                        "Aniversariante não foi cadastrado. " +
-                                "Verifique se já não existia");
-            }
-        });*/
+    }
 
+    public static void main(String[] args) {
+        JFrame janela = new AgendaGUI3_Menu();
+        janela.setVisible(true);
+        janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 }
